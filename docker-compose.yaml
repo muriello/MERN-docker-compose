@@ -1,35 +1,35 @@
 services:
   backend:
-    build: ./mern/backend
+    build: ./mern/backend     #this is a folder where the dockerfile is located
     ports:
-      - "5050:5050" 
+      - "5051:5050" 
     networks:
-      - mern_network
+      - networkmern
     environment:
       MONGO_URI: mongodb://mongo:27017/mydatabase  
     depends_on:
       - mongodb
 
   frontend:
-    build: ./mern/frontend
+    build: ./mern/frontend     #this is a folder where the dockerfile is located
     ports:
-      - "5173:5173"  
+      - "5174:5173"  
     networks:
-      - mern_network
+      - networkmern
     environment:
       REACT_APP_API_URL: http://backend:5050 
 
   mongodb:
     image: mongo:latest  
     ports:
-      - "27017:27017"  
+      - "27018:27017"  
     networks:
-      - mern_network
+      - networkmern
     volumes:
       - mongo-data:/data/db  
 
 networks:
-  mern_network:
+  networkmern:
     driver: bridge 
 
 volumes:
